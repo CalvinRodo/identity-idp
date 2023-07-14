@@ -1,7 +1,7 @@
 {
     "name": "identity-idp",
     "dockerComposeFile": "docker-compose.yml",
-	"service": "idp",
+    "service": "idp",
     "workspaceFolder": "/workspace",
     "features": {
         "ghcr.io/devcontainers/features/node:1": {
