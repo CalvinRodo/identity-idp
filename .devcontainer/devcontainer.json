@@ -1,0 +1,24 @@
+{
+    "name": "identity-idp",
+    "dockerComposeFile": "docker-compose.yml",
+	"service": "idp",
+    "workspaceFolder": "/workspace",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "18.16.1"
+        }
+    },
+    "containerEnv": {
+        "SHELL": "/bin/zsh"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "github.copilot",
+                "rebornix.Ruby",
+                "wingrunr21.vscode-ruby"
+            ]
+        }
+    },
+    "remoteUser": "vscode"
+}

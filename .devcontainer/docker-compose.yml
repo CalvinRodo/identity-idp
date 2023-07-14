@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  idp:
+    image: "mcr.microsoft.com/devcontainers/ruby:0-3.2"
+    depends_on:
+      - postgres
+      - postgres-worker
+      - redis
+    command: sleep infinity
+    volumes:
+      - ..:/workspace:cached
+    ports:
+      - "3000:3000"          
+    environment:
+      FOREMAN_HOST: "0.0.0.0"
+      LOGIN_ENV: dev
+      POSTGRES_SSLMODE: prefer
+      POSTGRES_NAME: idp
+      POSTGRES_HOST: postgres
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_WORKER_SSLMODE: prefer
+      POSTGRES_WORKER_NAME: idp-worker-jobs
+      POSTGRES_WORKER_HOST: postgres-worker
+      POSTGRES_WORKER_USERNAME: postgres
+      POSTGRES_WORKER_PASSWORD: postgres      
+      RAILS_OFFLINE: true
+      REDIS_THROTTLE_URL: redis://redis:6379/1
+      REDIS_URL: redis://redis:6379/0
+
+  postgres:
+    image: postgis/postgis:14-3.3
+    restart: unless-stopped
+    command:
+      - "postgres"
+      - "-c"
+      - "listen_addresses=*"
+    environment:
+      POSTGRES_DB: idp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  postgres-worker:
+    image: postgres:14
+    restart: unless-stopped
+    command:
+      - "postgres"
+      - "-c"
+      - "listen_addresses=*"
+    environment:
+      POSTGRES_DB: idp-worker-jobs
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  redis:
+    image: redis:7
+    restart: unless-stopped

@@ -3,10 +3,11 @@ postgresql: &postgresql
   encoding: utf8
   database: identity_idp_<%= Rails.env %>
   port: 5432
-  username: <%= ENV['DOCKER_DB_USER'] %>
+  username: <%= ENV['POSTGRES_USERNAME'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 defaults: &defaults
-  host: <%= ENV['DOCKER_DB_HOST'] || 'localhost' %>
+  host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>
   pool: 5
   <<: *postgresql
   # timeout settings
