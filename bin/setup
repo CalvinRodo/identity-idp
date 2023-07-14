@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'pathname'
-require 'yaml'
 
 # path to your application root.
 APP_ROOT = Pathname.new File.expand_path("../../",  __FILE__)
@@ -24,8 +23,7 @@ Dir.chdir APP_ROOT do
   ]
 
   puts '== Setting up config overrides =='
-  default_application_yml = { 'development' => { 'config_key' => nil } }
-  File.write('config/application.yml', default_application_yml.to_yaml) unless File.exist?('config/application.yml')
+  run "cp config/application.yml.default.development config/application.yml" unless File.exist?('config/application.yml')
 
   puts "== Linking service_providers.yml =="
   run "test -r config/service_providers.yml || ln -sv service_providers.localdev.yml config/service_providers.yml"
@@ -50,19 +48,10 @@ Dir.chdir APP_ROOT do
   run "cp pwned_passwords/pwned_passwords.txt.sample pwned_passwords/pwned_passwords.txt"
 
   puts "\n== Installing dependencies =="
-  brew_installed = system "brew -v 2>&1"
-  run "brew bundle" if brew_installed
   run "gem install bundler --conservative"
   run 'gem install foreman --conservative && gem update foreman'
   run "bundle check || bundle install --without deploy production"
   run "yarn install"
-
-  puts "\n== Stopping running services to ensure clean start =="
-  run "brew services stop --all" if brew_installed
-
-  puts "\n== Starting services =="
-  run "brew services start redis" if brew_installed
-  run "brew services start postgresql@14" if brew_installed
 
   puts "\n== Preparing database =="
   run 'make clobber_db'

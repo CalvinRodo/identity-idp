@@ -1,0 +1,15 @@
+---
+development:
+  config_key: 
+  database_host: ['env', 'POSTGRES_HOST']
+  database_name: ['env', 'POSTGRES_NAME']
+  database_password: ['env', 'POSTGRES_PASSWORD']
+  database_sslmode: ['env', 'POSTGRES_SSLMODE']
+  database_username: ['env', 'POSTGRES_USERNAME']
+  database_worker_jobs_name: ['env', 'POSTGRES_WORKER_NAME']
+  database_worker_jobs_username: ['env', 'POSTGRES_WORKER_USERNAME']
+  database_worker_jobs_host: ['env', 'POSTGRES_WORKER_HOST']
+  database_worker_jobs_password: ['env', 'POSTGRES_WORKER_PASSWORD']
+  database_worker_jobs_sslmode: ['env', 'POSTGRES_WORKER_SSLMODE']
+  redis_throttle_url: ['env', 'REDIS_THROTTLE_URL']
+  redis_url: ['env', 'REDIS_URL']
