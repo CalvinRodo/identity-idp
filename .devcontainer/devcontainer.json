@@ -14,10 +14,11 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "github.copilot",
-                "rebornix.Ruby",
-                "wingrunr21.vscode-ruby"
-            ]
+				"github.copilot",
+				"ms-ossdata.vscode-postgresql",
+				"Shopify.ruby-lsp",
+				"KoichiSasada.vscode-rdbg"
+			]
         }
     },
     "remoteUser": "vscode"

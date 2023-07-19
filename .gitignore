@@ -68,7 +68,6 @@ Vagrantfile
 /test
 /tmp/*
 /.tmp/
-/.vscode/
 /vendor/bundle
 .yardoc
 /doc/
